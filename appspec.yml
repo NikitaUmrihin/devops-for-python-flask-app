@@ -1,0 +1,21 @@
+version: 0.0
+os: linux
+files:
+  - source: /
+    destination: /home/ec2-user/app
+hooks:
+  BeforeInstall:
+    - location: scripts/before.sh
+      runas: ec2-user
+  Install:
+    - location: scripts/install_dependencies.sh
+      runas: ec2-user
+  AfterInstall:
+    - location: scripts/start_docker.sh
+      runas: ec2-user
+  ApplicationStart:
+    - location: scripts/start_app.sh
+      runas: ec2-user
+  ApplicationStop:
+    - location: scripts/stop.sh
+      runas: ec2-user
